@@ -32,8 +32,9 @@ export const audio = (() => {
     
         // Gradually increase volume
         const interval = setInterval(() => {
-            audio.volume += 0.1; // Increase volume by 10% each time
-            if (audio.volume >= 1) {
+            if (audio.volume < 1) {
+                audio.volume += 0.1; // Increase volume by 10% each time
+            } else {
                 clearInterval(interval); // Stop increasing volume when it reaches 100%
             }
         }, 1000); // Adjust the interval time (in milliseconds) as needed
