@@ -2,21 +2,42 @@ export const audio = (() => {
 
     const music = document.getElementById('button-music');
     let audio = null;
-    let isPageVisible = true;
 
-    // Function to handle visibility change
-    const handleVisibilityChange = () => {
-        if (document.visibilityState === 'hidden') {
-            if (audio) {
-                audio.pause(); // Pause audio if the document is hidden
-            }
-            isPageVisible = false;
-        } else {
-            isPageVisible = true;
+
+    // Function to handle window blur event
+    const handleWindowBlur = () => {
+        if (audio) {
+            audio.pause(); // Pause audio when window loses focus
         }
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    // Function to handle window focus event
+    const handleWindowFocus = () => {
+        if (audio) {
+            audio.play(); // Resume playing audio when window gains focus
+        }
+    };
+
+    // Event listeners for window blur and focus events
+    window.addEventListener('blur', handleWindowBlur);
+    window.addEventListener('focus', handleWindowFocus);
+
+
+    // let isPageVisible = true;
+
+    // // Function to handle visibility change
+    // const handleVisibilityChange = () => {
+    //     if (document.visibilityState === 'hidden') {
+    //         if (audio) {
+    //             audio.pause(); // Pause audio if the document is hidden
+    //         }
+    //         isPageVisible = false;
+    //     } else {
+    //         isPageVisible = true;
+    //     }
+    // };
+
+    // document.addEventListener('visibilitychange', handleVisibilityChange);
 
 
     // const getAudio = () => {
